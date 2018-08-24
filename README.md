@@ -2,9 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
+Following along with the Pluralsight course [Angular HTTP Communication](https://app.pluralsight.com/library/courses/angular-http-communication/table-of-contents) by [Brice Wilson](https://github.com/bricewilson)
+
+The code in this app was downloaded from the exercise files in that course and then upgraded to use the latest version of [Angular](https://angular.io/) and [RxJS](https://rxjs-dev.firebaseapp.com/).
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server runing both the [Node.js](https://nodejs.org/en/) server and Angular client applications.  Navigate to `http://localhost:3000/`.  The app will automatically reload if you change any of the source files.
+
+Run `ng serve` for a dev server with only the client Angular app.  Navigate to `http://localhost:4200/`.  The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
