@@ -1,5 +1,5 @@
 import { Component, OnInit, VERSION } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/';
 import { Title } from '@angular/platform-browser';
 
 import { Book } from "app/models/book";
