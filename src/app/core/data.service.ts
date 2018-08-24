@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { allBooks, allReaders } from 'app/data';
 import { LoggerService } from './logger.service';
@@ -9,7 +11,7 @@ import { BookTrackerError } from 'app/models/bookTrackerError';
 @Injectable()
 export class DataService {
 
-  constructor(private loggerService: LoggerService) { }
+  constructor(private loggerService: LoggerService, private http: HttpClient) { }
 
   mostPopularBook: Book = allBooks[0];
 
