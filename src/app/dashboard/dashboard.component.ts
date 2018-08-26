@@ -1,9 +1,8 @@
 import { Component, OnInit, VERSION } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 
-import { Book } from "app/models/book";
-import { Reader } from "app/models/reader";
+import { Book } from 'app/models/book';
+import { Reader } from 'app/models/reader';
 import { DataService } from 'app/core/data.service';
 
 @Component({
@@ -12,27 +11,25 @@ import { DataService } from 'app/core/data.service';
   styles: []
 })
 export class DashboardComponent implements OnInit {
-
   allBooks: Book[];
   allReaders: Reader[];
   mostPopularBook: Book;
 
-  constructor(private dataService: DataService,
-              private title: Title) { }
-  
+  constructor(private dataService: DataService, private title: Title) {}
+
   ngOnInit() {
     this.getAllBooks();
     this.allReaders = this.dataService.getAllReaders();
     this.mostPopularBook = this.dataService.mostPopularBook;
-
     this.title.setTitle(`Book Tracker ${VERSION.full}`);
   }
 
   private getAllBooks() {
     this.dataService.getAllBooks()
-    .subscribe((data: Book[]) => this.allBooks = data,
-    (error: any) => console.log(error),
-    () => console.log('All done getting books'));
+    .subscribe(
+      (data: Book[]) => (this.allBooks = data),
+      (error: any) => console.log(error)
+    );
   }
 
   deleteBook(bookID: number): void {
@@ -42,5 +39,4 @@ export class DashboardComponent implements OnInit {
   deleteReader(readerID: number): void {
     console.warn(`Delete reader not yet implemented (readerID: ${readerID}).`);
   }
-
 }

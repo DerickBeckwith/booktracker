@@ -4,16 +4,15 @@ import { Observable } from 'rxjs';
 
 import { allBooks, allReaders } from 'app/data';
 import { LoggerService } from './logger.service';
-import { Reader } from "app/models/reader";
-import { Book } from "app/models/book";
+import { Reader } from 'app/models/reader';
+import { Book } from 'app/models/book';
 import { BookTrackerError } from 'app/models/bookTrackerError';
 
 @Injectable()
 export class DataService {
-
-  constructor(private loggerService: LoggerService, private http: HttpClient) { }
-
   mostPopularBook: Book = allBooks[0];
+
+  constructor(private loggerService: LoggerService, private http: HttpClient) {}
 
   setMostPopularBook(popularBook: Book): void {
     this.mostPopularBook = popularBook;
@@ -31,7 +30,7 @@ export class DataService {
     return this.http.get<Book[]>('/api/books');
   }
 
-  getBookById(id: number): Book {
-    return allBooks.find(book => book.bookID === id);
-  }  
+  getBookById(id: number): Observable<Book> {
+    return this.http.get<Book>(`/api/books/${id}`);
+  }
 }

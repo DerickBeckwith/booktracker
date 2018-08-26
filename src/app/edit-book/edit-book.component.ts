@@ -10,15 +10,21 @@ import { DataService } from 'app/core/data.service';
   styles: []
 })
 export class EditBookComponent implements OnInit {
-
   selectedBook: Book;
 
-  constructor(private route: ActivatedRoute,
-              private dataService: DataService) { }
+  constructor(private route: ActivatedRoute, private dataService: DataService) {}
 
   ngOnInit() {
-    let bookID: number = parseInt(this.route.snapshot.params['id']);
-    this.selectedBook = this.dataService.getBookById(bookID);
+    const bookID: number = parseInt(this.route.snapshot.params['id'], 10);
+    this.getBookById(bookID);
+  }
+
+  getBookById(id: number) {
+    this.dataService.getBookById(id)
+    .subscribe(
+      (data: Book) => (this.selectedBook = data),
+      (error: any) => console.log(error)
+    );
   }
 
   setMostPopular(): void {
