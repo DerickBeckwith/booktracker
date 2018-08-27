@@ -24,8 +24,13 @@ export class DataService {
     return this.http.get<Reader[]>('/api/readers');
   }
 
-  getReaderById(id: number): Reader {
-    return allReaders.find(reader => reader.readerID === id);
+  getReaderById(id: number): Observable<Reader> {
+    return this.http.get<Reader>(`/api/readers/${id}`, {
+      headers: new HttpHeaders({
+        Accept: 'application/json',
+        Authorization: 'my-token'
+      })
+    });
   }
 
   getAllBooks(): Observable<Book[]> {
