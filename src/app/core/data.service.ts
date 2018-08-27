@@ -78,4 +78,24 @@ export class DataService {
   deleteBookById(id: number): Observable<void> {
     return this.http.delete<void>(`/api/books/${id}`);
   }
+
+  addReader(reader: Reader): Observable<Reader> {
+    return this.http.post<Reader>('/api/readers', reader, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    });
+  }
+
+  updateReader(reader: Reader): Observable<void> {
+    return this.http.put<void>(`/api/readers/${reader.readerID}`, reader, {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    });
+  }
+
+  deleteReaderById(id: number): Observable<void> {
+    return this.http.delete<void>(`/api/readers/${id}`);
+  }
 }
