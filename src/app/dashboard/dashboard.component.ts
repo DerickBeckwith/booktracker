@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getAllBooks();
-    this.allReaders = this.dataService.getAllReaders();
+    this.getAllReaders();
     this.mostPopularBook = this.dataService.mostPopularBook;
     this.title.setTitle(`Book Tracker ${VERSION.full}`);
   }
@@ -27,7 +27,19 @@ export class DashboardComponent implements OnInit {
   private getAllBooks() {
     this.dataService
       .getAllBooks()
-      .subscribe((data: Book[]) => (this.allBooks = data), (error: any) => console.log(error));
+      .subscribe(
+        (books: Book[]) => (this.allBooks = books),
+        (error: any) => console.log(error)
+      );
+  }
+
+  private getAllReaders() {
+    this.dataService
+      .getAllReaders()
+      .subscribe(
+        (readers: Reader[]) => (this.allReaders = readers),
+        (error: any) => console.log(error)
+      );
   }
 
   deleteBook(bookID: number): void {
