@@ -27,10 +27,7 @@ export class DashboardComponent implements OnInit {
   private getAllBooks() {
     this.dataService
       .getAllBooks()
-      .subscribe(
-        (books: Book[]) => (this.allBooks = books),
-        (error: any) => console.log(error)
-      );
+      .subscribe((books: Book[]) => (this.allBooks = books), (error: any) => console.log(error));
   }
 
   private getAllReaders() {
@@ -55,6 +52,14 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteReader(readerID: number): void {
-    console.warn(`Delete reader not yet implemented (readerID: ${readerID}).`);
+    this.dataService.deleteReaderById(readerID).subscribe(
+      () => {
+        const index: number = this.allReaders.findIndex(reader => reader.readerID === readerID);
+        const name: string = this.allReaders[index].name;
+        this.allReaders.splice(index, 1);
+        console.log(`${name} was deleted sucessfully.`);
+      },
+      (error: any) => console.log(error)
+    );
   }
 }
