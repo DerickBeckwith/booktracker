@@ -41,7 +41,7 @@ export class EditBookComponent implements OnInit {
     this.dataService
       .updateBook(this.selectedBook)
       .subscribe(
-        () => console.log(`{this.selectedBook.title} updated sucessfully.`),
+        () => console.log(`${this.selectedBook.title} updated sucessfully.`),
         (error: any) => console.log(error)
       );
   }
