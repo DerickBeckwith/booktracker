@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Reader } from "app/models/reader";
+import { Reader } from 'app/models/reader';
+import { DataService } from 'app/core/data.service';
 
 @Component({
   selector: 'app-add-reader',
@@ -8,16 +9,19 @@ import { Reader } from "app/models/reader";
   styles: []
 })
 export class AddReaderComponent implements OnInit {
+  constructor(private dataService: DataService) {}
 
-  constructor() { }
-
-  ngOnInit() { }
+  ngOnInit() {}
 
   saveReader(formValues: any): void {
-    let newReader: Reader = <Reader>formValues;
+    const newReader: Reader = <Reader>formValues;
     newReader.readerID = 0;
     console.log(newReader);
-    console.warn('Save new reader not yet implemented.');
+    this.dataService
+      .addReader(newReader)
+      .subscribe(
+        (reader: Reader) => console.log('Added new Reader: ', reader),
+        (error: any) => console.log(error)
+      );
   }
-
 }
