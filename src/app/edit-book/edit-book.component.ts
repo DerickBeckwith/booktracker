@@ -18,7 +18,6 @@ export class EditBookComponent implements OnInit {
   ngOnInit() {
     const bookID: number = parseInt(this.route.snapshot.params['id'], 10);
     this.getBookById(bookID);
-    this.getOldBookById(bookID);
   }
 
   getBookById(id: number) {
