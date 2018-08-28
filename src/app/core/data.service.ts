@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 
 import { allBooks } from 'app/data';
-import { LoggerService } from './logger.service';
 import { Reader } from 'app/models/reader';
 import { Book } from 'app/models/book';
 import { OldBook } from 'app/models/oldBook';
@@ -14,7 +13,7 @@ import { BookTrackerError } from 'app/models/bookTrackerError';
 export class DataService {
   mostPopularBook: Book = allBooks[0];
 
-  constructor(private loggerService: LoggerService, private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   setMostPopularBook(popularBook: Book): void {
     this.mostPopularBook = popularBook;
