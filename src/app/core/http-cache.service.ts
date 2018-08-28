@@ -18,7 +18,7 @@ export class HttpCacheService {
     this.requests[url] = undefined;
   }
 
-  invalidateCache(): void {
+  invalidate(): void {
     this.requests = {};
   }
 }

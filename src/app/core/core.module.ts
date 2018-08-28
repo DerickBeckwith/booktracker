@@ -10,6 +10,7 @@ import { BooksResolverService } from './books-resolver.service';
 import { AddHeaderInterceptor } from './add-header.interceptor';
 import { LogResponseInterceptor } from './log-response.interceptor';
 import { HttpCacheService } from './http-cache.service';
+import { CacheInterceptor } from './cache.interceptor';
 
 @NgModule({
   imports: [CommonModule],
@@ -21,6 +22,7 @@ import { HttpCacheService } from './http-cache.service';
     BooksResolverService,
     { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LogResponseInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
     HttpCacheService
   ]
 })
