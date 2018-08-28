@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 
-import { allBooks, allReaders } from 'app/data';
+import { allBooks } from 'app/data';
 import { LoggerService } from './logger.service';
 import { Reader } from 'app/models/reader';
 import { Book } from 'app/models/book';
@@ -25,19 +25,13 @@ export class DataService {
   }
 
   getReaderById(id: number): Observable<Reader> {
-    return this.http.get<Reader>(`/api/readers/${id}`, {
-      headers: new HttpHeaders({
-        Accept: 'application/json',
-        Authorization: 'my-token'
-      })
-    });
+    return this.http.get<Reader>(`/api/readers/${id}`);
   }
 
   getAllBooks(): Observable<Book[] | BookTrackerError> {
-    return this.http.get<Book[]>('/api/books')
-    .pipe(
-      catchError(error => this.handleHttpError(error))
-    );
+    return this.http
+      .get<Book[]>('/api/books')
+      .pipe(catchError(error => this.handleHttpError(error)));
   }
 
   private handleHttpError(error: HttpErrorResponse): Observable<BookTrackerError> {
@@ -49,12 +43,7 @@ export class DataService {
   }
 
   getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(`/api/books/${id}`, {
-      headers: new HttpHeaders({
-        Accept: 'application/json',
-        Authorization: 'my-token'
-      })
-    });
+    return this.http.get<Book>(`/api/books/${id}`);
   }
 
   getOldBookById(id: number): Observable<OldBook> {
@@ -71,19 +60,11 @@ export class DataService {
   }
 
   addBook(book: Book): Observable<Book> {
-    return this.http.post<Book>('/api/books', book, {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json'
-      })
-    });
+    return this.http.post<Book>('/api/books', book);
   }
 
   updateBook(book: Book): Observable<void> {
-    return this.http.put<void>(`/api/books/${book.bookID}`, book, {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json'
-      })
-    });
+    return this.http.put<void>(`/api/books/${book.bookID}`, book);
   }
 
   deleteBookById(id: number): Observable<void> {
@@ -91,19 +72,11 @@ export class DataService {
   }
 
   addReader(reader: Reader): Observable<Reader> {
-    return this.http.post<Reader>('/api/readers', reader, {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json'
-      })
-    });
+    return this.http.post<Reader>('/api/readers', reader);
   }
 
   updateReader(reader: Reader): Observable<void> {
-    return this.http.put<void>(`/api/readers/${reader.readerID}`, reader, {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json'
-      })
-    });
+    return this.http.put<void>(`/api/readers/${reader.readerID}`, reader);
   }
 
   deleteReaderById(id: number): Observable<void> {
